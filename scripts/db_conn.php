@@ -1,2 +1,2 @@
 <?php
-    $conn = new mysqli("localhost", "root", "", "CashOn");
+    $conn = new mysqli("localhost", "root", "", "cashon");

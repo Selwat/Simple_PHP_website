@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>CashOn Zarejestruj</title>
+    <title>Cashon Zarejestruj</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -34,115 +34,55 @@ ERROR;
     ?>
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="./" class="h1"><span style="color: #FFA500"><b>CashOn</b></a></span>
+            <a href="./" class="h1"><span style="color: #007bff"><b>Cashon</b></a></span>
         </div>
         <div class="card-body">
             <p class="login-box-msg">Rejestracja użytkownika</p>
 
             <form action="../../scripts/register_user.php" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Podaj imię" name="firstName">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user"></span>
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" placeholder="Podaj imię" name="Name">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Podaj nazwisko" name="lastName">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-user"></span>
-                        </div>
-                    </div>
+                    <input type="text" class="form-control" placeholder="Podaj nazwisko" name="LastName">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Podaj email" name="email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
+                    <input type="email" class="form-control" placeholder="Podaj email" name="Email">
+
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Powtórz email" name="confirm_email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
+                    <input type="email" class="form-control" placeholder="Powtórz email" name="ConfirmEmail">
+
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Podaj dodatkowy email" name="additional_email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
+                    <input type="password" class="form-control" placeholder="Podaj hasło" name="Password">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Powtórz dodatkowy email" name="confirm_additional_email">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
-                        </div>
-                    </div>
+                    <input type="password" class="form-control" placeholder="Powtórz hasło" name="ConfirmPassword">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Podaj hasło" name="pass">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
+                    <input type="date" class="form-control" name="Birthday">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Powtórz hasło" name="confirm_pass">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-lock"></span>
-                        </div>
-                    </div>
+                    <input type="password" class="form-control" placeholder="Kod pocztowy" name="PostCode">
+
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="date" class="form-control" name="birthday">
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-calendar"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="input-group mb-3">
-                    <select class="form-control" name="cities_id">
-                        <?php
-                        require_once "../scripts/db_conn.php";
-                        $sql = "SELECT * FROM cities";
-                        $result = $conn->query($sql);
-                        while( $city = $result->fetch_assoc()){
-                            echo "<option value='$city[id]'>$city[city]</option>";
-                        }
-                        ?>
-                    </select>
-                    <div class="input-group-append">
-                        <div class="input-group-text">
-                            <span class="fas fa-city"></span>
-                        </div>
-                    </div>
+                    <input type="password" class="form-control" placeholder="Miasto" name="City">
                 </div>
 
                 <div class="row">
                     <div class="col-7">
                         <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
+                            <input type="checkbox" id="agreeTerms" name="Term" value="agree">
                             <label for="agreeTerms">
                                 Zgadzam się z <a href="#">regulaminem</a>
                             </label>
