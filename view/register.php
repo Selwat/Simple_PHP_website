@@ -6,7 +6,7 @@ session_start();
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Cashon Zarejestruj</title>
+    <title>Dziennik Zarejestruj</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -20,32 +20,30 @@ session_start();
 <body class="hold-transition register-page">
 <div class="register-box">
     <?php
-    if (isset($_SESSION["error_message"])){
+    if (isset($_SESSION["bledy"])){
         echo <<< ERROR
         <div class="callout callout-danger">
            <h5>Błąd!</h5>
-           <p>$_SESSION[error_message]</p>
+           <p>$_SESSION[bledy]</p>
         </div>
 ERROR;
-
-        //echo $_SESSION["error_message"];
-        unset($_SESSION["error_message"]);
+        unset($_SESSION["bledy"]);
     }
     ?>
     <div class="card card-outline card-primary">
         <div class="card-header text-center">
-            <a href="./" class="h1"><span style="color: #007bff"><b>Cashon</b></a></span>
+            <a href="register.php" class="h1"><span style="color: #007bff"><b>Dziennik</b></a></span>
         </div>
         <div class="card-body">
-            <p class="login-box-msg">Rejestracja użytkownika</p>
+            <p class="text-center h3"><span style="color: #007bff">Rejestracja użytkownika</p>
 
-            <form action="../../scripts/register_user.php" method="post">
+            <form action="../scripts/register.php" method="post">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Podaj imię" name="Name">
+                    <input type="text" class="form-control" placeholder="Podaj imię" name="Imie">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Podaj nazwisko" name="LastName">
+                    <input type="text" class="form-control" placeholder="Podaj nazwisko" name="Nazwisko">
                 </div>
 
                 <div class="input-group mb-3">
@@ -54,29 +52,24 @@ ERROR;
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" placeholder="Powtórz email" name="ConfirmEmail">
+                    <input type="email" class="form-control" placeholder="Powtórz email" name="PotwierdźEmail">
 
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Podaj hasło" name="Password">
+                    <input type="password" class="form-control" placeholder="Podaj hasło" name="Hasło">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Powtórz hasło" name="ConfirmPassword">
+                    <input type="password" class="form-control" placeholder="Powtórz hasło" name="PotwierdźHasło">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="date" class="form-control" name="Birthday">
+                    <input type="date" class="form-control" name="DataUrodzenia">
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Kod pocztowy" name="PostCode">
-
-                </div>
-
-                <div class="input-group mb-3">
-                    <input type="password" class="form-control" placeholder="Miasto" name="City">
+                    <input type="number" class="form-control" placeholder="Numer telefonu" name="NumerTelefonu">
                 </div>
 
                 <div class="row">
@@ -84,7 +77,7 @@ ERROR;
                         <div class="icheck-primary">
                             <input type="checkbox" id="agreeTerms" name="Term" value="agree">
                             <label for="agreeTerms">
-                                Zgadzam się z <a href="#">regulaminem</a>
+                                Zgadzam się z <a href="regulamin.php">regulaminem</a>
                             </label>
                         </div>
                     </div>
