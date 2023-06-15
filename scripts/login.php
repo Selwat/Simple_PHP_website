@@ -15,21 +15,28 @@
         else
         {
             require_once "./db_conn.php";
-            $sql = "SELECT * FROM users WHERE users.Email=:email";
+            $sql = "SELECT * FROM users WHERE users.Email=?";
+            $sth = $conn->prepare($sql);
 
-            $sth = $dbh->prepare($sql);
-            $sth->bindParam(':email', $_POST["Email"], PDO::PARAM_STR);
+            $sth->bind_param("s", $_POST["Email"]);
             $sth->execute();
+            $result = $sth->get_result();
 
-            if ($sth->rowCount() == 1){
-                $result = $sth->fetchAll(pdo::FETCH_ASSOC);
+            if ($result->num_rows == 1){
 
-                if (password_verify($_POST["Hasło"], $result[0]["Password"]))
+                $user = $result->fetch_assoc();
+
+                if (password_verify($_POST["Hasło"], $user["Password"]))
                 {
-                    $_SESSION["logged"]["Name"] = $result[0]["Name"];
-                    $_SESSION["logged"]["LastName"] = $result[0]["LastName"];
+                    $_SESSION["logged"]["Name"] = $user["Name"];
+                    $_SESSION["logged"]["LastName"] = $user["LastName"];
                     $_SESSION["logged"]["session_id"] = session_id();
-                    $_SESSION["logged"]["role"] = $result[0]["role"];
+                    $_SESSION["logged"]["role"] = $user["role"];
+                    $_SESSION["logged"]["Email"] = $user["Email"];
+                    $_SESSION["logged"]["DataUrodzenia"] = $user["Birthday"];
+                    $_SESSION["logged"]["NumerTelefonu"] = $user["PhoneNumber"];
+                    $_SESSION["logged"]["content"]=1;
+
                     header("location: ../view/logged.php");
                 }
                 else

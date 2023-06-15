@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 14 Cze 2023, 12:07
+-- Czas generowania: 15 Cze 2023, 14:25
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -31,7 +31,8 @@ CREATE TABLE `grades` (
   `id` int(11) NOT NULL,
   `student_id` int(11) NOT NULL,
   `grade` int(11) NOT NULL,
-  `subject` varchar(60) NOT NULL
+  `subject` varchar(60) NOT NULL,
+  `opis` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -69,9 +70,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role`, `Name`, `LastName`, `Email`, `Password`, `PhoneNumber`, `Birthday`) VALUES
-(1, 'admin', 'Daniel', 'Szafrański', 'daniel337@wp.pl', '1@qwerty', 723910337, '2002-06-11'),
-(2, 'uczeń', 'Jan', 'Kowalski', 'JanKowalski@wp.pl', 'zaq1@WSX', 444000111, '2017-06-15'),
-(13, 'uczeń', 'Szymon', 'Kowalski', 'Szymon456@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$TUhQUUVaeVJxTXdkMkpCMQ$n+KJIgx7pqQmSkrVgr8cthF6obnyBMBpkfRxfboxias', 777000111, '2023-08-18');
+(3, 'uczeń', 'Szymon', 'Kowalski', 'Szymon456@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$RC9zRXl2SEtkNlVpTE9PRw$sFLPBWak+WuX+SjA6e/IHMyrkxZFbtG+nEHPh2YcZp4', 666777111, '2023-06-24'),
+(4, 'admin', 'admin', 'admin', 'admin@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$Y3ZIczlHNy5Pa3NUOXI4Zw$TaIZPGfZMKzAAKrEIAx1ywpd4lbFAKIGJrQh5dFuPNY', 666555222, '2023-06-17'),
+(5, 'nauczyciel', 'Basia', 'Kowalska', 'Basia@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$SXlDU0RtNldhaWZLWFdvUA$wIKO0kxDqa+bK3ZvQ7Gax28kuvGqVwLkqZFXYjv92DA', 666444222, '2023-07-01');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -81,7 +82,8 @@ INSERT INTO `users` (`id`, `role`, `Name`, `LastName`, `Email`, `Password`, `Pho
 -- Indeksy dla tabeli `grades`
 --
 ALTER TABLE `grades`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `student_id` (`student_id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -97,13 +99,23 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- Ograniczenia dla zrzutów tabel
+--
+
+--
+-- Ograniczenia dla tabeli `grades`
+--
+ALTER TABLE `grades`
+  ADD CONSTRAINT `grades_ibfk_1` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

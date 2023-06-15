@@ -2,7 +2,7 @@
     session_start();
     if (!isset($_SESSION["logged"]) || $_SESSION["logged"]["session_id"] != session_id() || session_status() != 2)
     {
-        header("location: index.php");
+        header("location: ./");
         exit();
     }
     else
@@ -26,7 +26,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Dashboard 2</title>
+    <title>Dziennik elektroniczny | Pulpit</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -35,13 +35,7 @@
     <!-- overlayScrollbars -->
     <link rel="stylesheet" href="../plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../dist/css/adminlte.min.css">
-
-    <!-- DataTables -->
-    <link rel="stylesheet" href="../plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
-    <link rel="stylesheet" href="../plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
-    <link rel="stylesheet" href="../plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
-
+    <link rel="stylesheet" href="../dist/css/adminlte.css">
 </head>
 <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
 <div class="wrapper">
@@ -52,32 +46,49 @@
     </div>
 
     <!-- Navbar -->
-<!--    --><?php
-//    require_once './logged/navbar.php';
-//    ?>
+    <?php
+    require_once "./navbar.php";
+    ?>
     <!-- /.navbar -->
 
     <!-- Main Sidebar Container -->
-<!--    --><?php
-//    require_once "./logged/$path/aside.php";
-//    ?>
+    <?php
+    require_once "./$path/aside.php";
+    ?>
 
     <!-- Content Wrapper. Contains page content -->
-<!--    --><?php
-//    require_once "./logged/$path/content.php";
-//    ?>
+    <?php
+    switch($_SESSION["logged"]["content"]){
+        case 1:
+            $path2 = "content.php";
+            break;
+        case 2:
+            $path2 = "content_oceny.php";
+            break;
+        case 3:
+            $path2 = "content_historia_ocen.php";
+            break;
+        case 4:
+            $path2= "content_panel_administracyjny.php";
+            break;
+        case 5:
+            $path2= "content_wyszukaj.php";
+            break;
+        case 6:
+            $path2= "content_wpisz_ocene.php";
+            break;
+        case 7:
+            $path2= "content_historia_ocen_nauczyciel.php";
+            break;
+        case 8:
+            $path2= "content_oceny_nauczyciel.php";
+            break;
+    }
+
+    require_once "./$path/$path2";
+    ?>
     <!-- /.content-wrapper -->
 
-    <!-- Control Sidebar -->
-    <aside class="control-sidebar control-sidebar-dark">
-        <!-- Control sidebar content goes here -->
-    </aside>
-    <!-- /.control-sidebar -->
-
-    <!-- Main Footer -->
-<!--    --><?php
-//    require_once './logged/footer.php';
-//    ?>
 </div>
 <!-- ./wrapper -->
 
@@ -102,43 +113,8 @@
 
 <!-- AdminLTE for demo purposes -->
 <script src="../dist/js/demo.js"></script>
+
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="../dist/js/pages/dashboard2.js"></script>
-
-<!-- DataTables  & Plugins -->
-<script src="../plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="../plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="../plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="../plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="../plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="../plugins/jszip/jszip.min.js"></script>
-<script src="../plugins/pdfmake/pdfmake.min.js"></script>
-<script src="../plugins/pdfmake/vfs_fonts.js"></script>
-<script src="../plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="../plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="../plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-<!-- AdminLTE App -->
-<script src="../dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="../dist/js/demo.js"></script>
-<!-- Page specific script -->
-<script>
-    $(function () {
-        $("#example1").DataTable({
-            "responsive": true, "lengthChange": false, "autoWidth": false,
-            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-        $('#example2').DataTable({
-            "paging": true,
-            "lengthChange": false,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-        });
-    });
-</script>
 </body>
 </html>

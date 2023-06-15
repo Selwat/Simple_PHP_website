@@ -27,10 +27,10 @@
         echo <<< ERROR
         <div class="callout callout-success">
            <h5>Operacja powiodła się!</h5>
-           <p>$_SESSION[success]</p>
+           <p>$_SESSION[sukces]</p>
         </div>
 ERROR;
-        unset($_SESSION["suckes"]);
+        unset($_SESSION["sukces"]);
     }
 
     if (isset($_SESSION["bledy"])){

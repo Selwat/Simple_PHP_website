@@ -53010,3 +53010,36 @@ a.text-muted:hover {
   border-color: #4b545c !important;
 }
 /*# sourceMappingURL=adminlte.css.map */
+
+#main-header{
+    display: flex;
+    justify-content: space-between;
+}
+
+.buttonWyloguj{
+    background-color: #dc3545;
+  color: #ffffff;
+  padding: 5px 18px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 40px;
+}
+
+.buttonWyloguj:hover {
+  background-color: #cc0000;
+}
+
+.buttonWyloguj:active {
+  background-color: #990000;
+}
+.nav-item-poprawiony{
+    display: flex;
+    flex-wrap: nowrap;
+}
+.content-poprawiony{
+    width: 70vw;
+    margin-left:-10vw;
+    display: flex;
+    flex-wrap: wrap;
+}

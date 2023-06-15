@@ -49,31 +49,23 @@
 
             require_once "./db_conn.php";
 
-            $sql = 'INSERT INTO `users` (`role`, `Name`, `LastName`, `Email`, `Password`, `PhoneNumber`,`Birthday`) VALUES (:role, :name, :lastname, :email, :password, :phonenumber, :birthday);';
+            $sql = 'INSERT INTO `users` (`role`, `Name`, `LastName`, `Email`, `Password`, `PhoneNumber`,`Birthday`) VALUES (?,?,?,?,?,?,?);';
 
-            $sth = $dbh->prepare($sql);
+            $sth = $conn->prepare($sql);
 
-            $sth->bindParam(':role', $rola, PDO::PARAM_STR);
-            $sth->bindParam(':name', $Imie, PDO::PARAM_STR);
-            $sth->bindParam(':lastname', $Nazwisko, PDO::PARAM_STR);
-            $sth->bindParam(':email', $Email, PDO::PARAM_STR);
-            $sth->bindParam(':password', $password_hash, PDO::PARAM_STR);
-            $sth->bindParam(':phonenumber', $NumerTelefonu, PDO::PARAM_STR);
-            $sth->bindParam(':birthday', $newDate, PDO::PARAM_STR);
+            $sth->bind_param('sssssss', $rola, $Imie, $Nazwisko, $Email, $password_hash, $NumerTelefonu, $newDate);
 
-            try {
-                $sth->execute();
-                if ($sth->rowCount() == 1){
-                    $_SESSION["sukces"] = "Prawidłowo dodano użytkownika $_POST[Imie] $_POST[Nazwisko]";
-                }
+            $sth->execute();
+
+            if ($sth->affected_rows == 1){
+                $_SESSION["sukces"] = "Prawidowo dodano użytkownika $_POST[Imie] $_POST[Nazwisko]";
                 header("location: ../view");
                 exit();
-
-            }catch (PDOException $e){
-
-                $_SESSION["bledy"] = "Nie dodano użytkownika: ".$e->errorInfo[2];
+            }
+            else
+            {
+                $_SESSION["bledy"] = "Nie dodano użytkownika";
                 echo "<script>history.back();</script>";
-
             }
         }
 
