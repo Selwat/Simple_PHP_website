@@ -53043,3 +53043,19 @@ a.text-muted:hover {
     display: flex;
     flex-wrap: wrap;
 }
+
+.card-outline {
+  padding-top: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh; /* Ustawia element na całą wysokość widoku */
+}
+
+.card-body {
+  text-align: center;
+ 
+}
+.list-group-item .float-right {
+  margin-left: 10px; /* Doda większy odstęp z lewej strony */
+}
