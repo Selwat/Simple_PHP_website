@@ -74,9 +74,6 @@
         case 5:
             $path2= "content_wyszukaj.php";
             break;
-        case 6:
-            $path2= "content_wpisz_ocene.php";
-            break;
         case 7:
             $path2= "content_historia_ocen_nauczyciel.php";
             break;

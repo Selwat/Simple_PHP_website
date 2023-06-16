@@ -28,12 +28,6 @@
                 <li class="nav-item menu-open">
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="../scripts/Move_wpisz_ocene.php" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Wpisz Ocenę</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
                             <a href="../scripts/Move_historia_nauczyciel.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Historia modyfikacji</p>
