@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 16 Cze 2023, 14:24
+-- Czas generowania: 16 Cze 2023, 15:53
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -40,8 +40,8 @@ CREATE TABLE `grades` (
 --
 
 INSERT INTO `grades` (`id`, `student_id`, `grade`, `subject`, `opis`) VALUES
-(8, 19, 2, 'Informatyka', 'Sprawdzian'),
-(12, 19, 5, 'Matematyka', 'Kartkówka');
+(14, 20, 2, 'Matematyka', 'Kartkówka'),
+(15, 30, 6, 'Informatyka', 'Egzamin');
 
 -- --------------------------------------------------------
 
@@ -51,15 +51,26 @@ INSERT INTO `grades` (`id`, `student_id`, `grade`, `subject`, `opis`) VALUES
 
 CREATE TABLE `history` (
   `Grade_id` int(11) NOT NULL,
+  `Student_Name` varchar(60) NOT NULL,
+  `Student_LastName` varchar(60) NOT NULL,
   `Date` date NOT NULL DEFAULT current_timestamp(),
   `OldGrade` int(11) NOT NULL,
   `NewGrade` int(11) NOT NULL,
   `subject` varchar(60) NOT NULL,
-  `opis` varchar(200) NOT NULL,
-  `Name` varchar(60) NOT NULL,
-  `LastName` varchar(60) NOT NULL,
-  `role` enum('admin','uczeń','nauczyciel') NOT NULL
+  `opis` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+
+--
+-- Zrzut danych tabeli `history`
+--
+
+INSERT INTO `history` (`Grade_id`, `Student_Name`, `Student_LastName`, `Date`, `OldGrade`, `NewGrade`, `subject`, `opis`) VALUES
+(3, 'Basia', 'Stefaniak', '2023-06-16', 5, 1, 'Matematyka', 'Kartkówka'),
+(4, 'Basia', 'Stefaniak', '2023-06-16', 1, 6, 'Matematyka', 'Kartkówka'),
+(5, 'Basia', 'Stefaniak', '2023-06-16', 6, 6, 'Matematyka', 'Kartkówka'),
+(6, 'Basia', 'Stefaniak', '2023-06-16', 6, 2, 'Matematyka', 'Kartkówka'),
+(7, 'Basia', 'Kaftan', '2023-06-16', 2, 2, 'Matematyka', 'Kartkówka'),
+(8, 'Katarzyna', 'Główczyńska', '2023-06-16', 6, 6, 'Informatyka', 'Egzamin');
 
 -- --------------------------------------------------------
 
@@ -84,9 +95,9 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `role`, `Name`, `LastName`, `Email`, `Password`, `PhoneNumber`, `Birthday`) VALUES
 (4, 'admin', 'admin', 'admin', 'admin@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$Y3ZIczlHNy5Pa3NUOXI4Zw$TaIZPGfZMKzAAKrEIAx1ywpd4lbFAKIGJrQh5dFuPNY', 666555222, '2023-06-17'),
-(19, 'uczeń', 'Katarzyna', 'Kowalska', 'Kowalska@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$VUFLYmpJU29jT2xvR2MwSA$HJpGk++68WpJUG1kvxdVH7fE9qX1PIidWyXsGnBbJmw', 444000999, '2023-07-05'),
-(20, 'uczeń', 'Basia', 'Kowalska', 'Basia@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$WGVCQzV4Mm1NSHBNaUtzNQ$yCPmYF4u5mySGj74P78UAgkIndVoClohxkrkdogf8h4', 444000922, '2023-05-18'),
-(27, 'nauczyciel', 'Basia', 'Gajda', 'Andrzejewska@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$eEMvSzkuajdnT3dlWTdyYw$p56KaumaEqL795WssjSUZKh5phYtXgft7804RBGbxWQ', 444222111, '2023-06-21');
+(20, 'uczeń', 'Basia', 'Kaftan', 'Basia@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$WGVCQzV4Mm1NSHBNaUtzNQ$yCPmYF4u5mySGj74P78UAgkIndVoClohxkrkdogf8h4', 444000922, '2023-05-18'),
+(27, 'nauczyciel', 'Basia', 'Podlasiak', 'Andrzejewska@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$eEMvSzkuajdnT3dlWTdyYw$p56KaumaEqL795WssjSUZKh5phYtXgft7804RBGbxWQ', 444222111, '2023-06-21'),
+(30, 'uczeń', 'Katarzyna', 'Główczyńska', 'Hamiga@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$TXZEZDUwWGJEM1A5OGJJUA$qdW37wa6MVzkywxYU0WyCmFDb9vDlIeRGHKCYFV4u9Y', 777222111, '2023-07-05');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -119,19 +130,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `history`
 --
 ALTER TABLE `history`
-  MODIFY `Grade_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Grade_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- Ograniczenia dla zrzutów tabel

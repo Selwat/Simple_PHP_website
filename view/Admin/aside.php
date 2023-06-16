@@ -40,7 +40,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="../scripts/Move_wpisz_ocene.php" class="nav-link">
+                            <a href="../scripts/Move_oceny_uczniow.php" class="nav-link">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>Wpisz ocene</p>
                             </a>
