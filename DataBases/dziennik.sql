@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 15 Cze 2023, 14:25
+-- Czas generowania: 16 Cze 2023, 14:24
 -- Wersja serwera: 10.4.27-MariaDB
 -- Wersja PHP: 8.2.0
 
@@ -35,6 +35,14 @@ CREATE TABLE `grades` (
   `opis` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
+--
+-- Zrzut danych tabeli `grades`
+--
+
+INSERT INTO `grades` (`id`, `student_id`, `grade`, `subject`, `opis`) VALUES
+(8, 19, 2, 'Informatyka', 'Sprawdzian'),
+(12, 19, 5, 'Matematyka', 'Kartkówka');
+
 -- --------------------------------------------------------
 
 --
@@ -45,7 +53,12 @@ CREATE TABLE `history` (
   `Grade_id` int(11) NOT NULL,
   `Date` date NOT NULL DEFAULT current_timestamp(),
   `OldGrade` int(11) NOT NULL,
-  `NewGrade` int(11) NOT NULL
+  `NewGrade` int(11) NOT NULL,
+  `subject` varchar(60) NOT NULL,
+  `opis` varchar(200) NOT NULL,
+  `Name` varchar(60) NOT NULL,
+  `LastName` varchar(60) NOT NULL,
+  `role` enum('admin','uczeń','nauczyciel') NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- --------------------------------------------------------
@@ -70,9 +83,10 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `role`, `Name`, `LastName`, `Email`, `Password`, `PhoneNumber`, `Birthday`) VALUES
-(3, 'uczeń', 'Szymon', 'Kowalski', 'Szymon456@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$RC9zRXl2SEtkNlVpTE9PRw$sFLPBWak+WuX+SjA6e/IHMyrkxZFbtG+nEHPh2YcZp4', 666777111, '2023-06-24'),
 (4, 'admin', 'admin', 'admin', 'admin@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$Y3ZIczlHNy5Pa3NUOXI4Zw$TaIZPGfZMKzAAKrEIAx1ywpd4lbFAKIGJrQh5dFuPNY', 666555222, '2023-06-17'),
-(5, 'nauczyciel', 'Basia', 'Kowalska', 'Basia@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$SXlDU0RtNldhaWZLWFdvUA$wIKO0kxDqa+bK3ZvQ7Gax28kuvGqVwLkqZFXYjv92DA', 666444222, '2023-07-01');
+(19, 'uczeń', 'Katarzyna', 'Kowalska', 'Kowalska@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$VUFLYmpJU29jT2xvR2MwSA$HJpGk++68WpJUG1kvxdVH7fE9qX1PIidWyXsGnBbJmw', 444000999, '2023-07-05'),
+(20, 'uczeń', 'Basia', 'Kowalska', 'Basia@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$WGVCQzV4Mm1NSHBNaUtzNQ$yCPmYF4u5mySGj74P78UAgkIndVoClohxkrkdogf8h4', 444000922, '2023-05-18'),
+(27, 'nauczyciel', 'Basia', 'Gajda', 'Andrzejewska@wp.pl', '$argon2i$v=19$m=65536,t=4,p=1$eEMvSzkuajdnT3dlWTdyYw$p56KaumaEqL795WssjSUZKh5phYtXgft7804RBGbxWQ', 444222111, '2023-06-21');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -84,6 +98,12 @@ INSERT INTO `users` (`id`, `role`, `Name`, `LastName`, `Email`, `Password`, `Pho
 ALTER TABLE `grades`
   ADD PRIMARY KEY (`id`),
   ADD KEY `student_id` (`student_id`);
+
+--
+-- Indeksy dla tabeli `history`
+--
+ALTER TABLE `history`
+  ADD PRIMARY KEY (`Grade_id`);
 
 --
 -- Indeksy dla tabeli `users`
@@ -99,13 +119,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `grades`
 --
 ALTER TABLE `grades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT dla tabeli `history`
+--
+ALTER TABLE `history`
+  MODIFY `Grade_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- Ograniczenia dla zrzutów tabel
